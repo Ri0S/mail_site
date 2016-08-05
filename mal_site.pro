@@ -5,3 +5,7 @@ CONFIG -= qt
 
 SOURCES += main.c
 
+LIBS += -lnetfilter_queue
+
+DISTFILES += \
+    mal_site.txt
