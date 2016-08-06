@@ -1,4 +1,4 @@
-nclude <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <netinet/in.h>
@@ -13,7 +13,7 @@ nclude <stdio.h>
 #include <string.h>
 
 const char Mal_Site_Table[100][64];
-
+const char *pwd = "/home/rios/bob5/mal_site/mal_site/mal_site.txt";
 void sig_int(int signo){
     printf("program exit\n");
     system("iptables -D OUTPUT -p ip -j NFQUEUE --queue-num 0");
@@ -79,7 +79,7 @@ int main(int argc, char **argv)
     struct sigaction intsig;
     FILE *fp;
 
-    if((fp = fopen("/home/rios/bob5/mal_site/mal_site/mal_site.txt", "r")) == NULL){
+    if((fp = fopen(pwd, "r")) == NULL){
         printf("fopen(r) errer\n");
         return 0;
     }
