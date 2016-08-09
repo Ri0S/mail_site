@@ -50,14 +50,14 @@ static int cb(struct nfq_q_handle *qh, struct nfgenmsg *nfmsg,
         cp += sizeof(HTTP1_1);
         if(!memcmp(cp, Host_srt, sizeof(Host_srt))){
             cp += sizeof(Host_srt);
-            char host[64] = "http://";
+            char host[64];
             int i;
-            for(i=7; *cp != '\r';i++){
+            for(i=0; *cp != '\r';i++){
                 host[i] = *cp++;
             }
             host[i] = '\0';
             for(i=0; Mal_Site_Table[i][0]; i++){
-                if(!strcmp(host, Mal_Site_Table[i])){
+                if(!strstr(host, Mal_Site_Table[i])){
                     printf("%s Dropped\n", host);
                     return nfq_set_verdict(qh, id, NF_DROP, 0, NULL);
                 }
